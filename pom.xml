@@ -15,7 +15,7 @@
 		<maven.version>3.1.2</maven.version>
 		<aspectj.version>1.9.7.M3</aspectj.version>
 		<allure.version>2.14.0</allure.version>
-		<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
+		<suiteName>testng.xml</suiteName>
 		<skipTests>false</skipTests>
 		<threads>1</threads>
 	</properties>
@@ -103,7 +103,7 @@
 				<configuration>
 					<threadCount>${threads}</threadCount>
 					<suiteXmlFiles>
-						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+						<suiteXmlFile>${basedir}/suites/${suiteName}</suiteXmlFile>
 					</suiteXmlFiles>
 					<skipTests>${skipTests}</skipTests>
 					<testFailureIgnore>true</testFailureIgnore>

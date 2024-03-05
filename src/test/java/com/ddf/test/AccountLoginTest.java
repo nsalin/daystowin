@@ -20,7 +20,7 @@ public class AccountLoginTest extends TestBase{
 	@Description("Test Description: To validate login feature")
 	public void accountLoginTest(Map<String, String> map) throws Exception {
 		WebDriver driver = DriverManager.getInstance().getDriver();
-		Log.info("Test Data: \n\t"+map);
+		Log.info("Test Data: \n"+map);
 		new HomePageSteps(driver).navigateToLoginPage();
 		LoginPageSteps loginPageSteps = new LoginPageSteps(driver);
 		loginPageSteps.enterLoginDetails(map.get("email"), map.get("password"));
