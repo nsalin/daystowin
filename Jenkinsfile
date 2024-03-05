@@ -5,7 +5,7 @@ pipeline {
         maven 'Maven' // Name of the Maven tool as configured in Jenkins
     }
     parameters {
-      choice choices: ['suite', 'testng'], name: 'SUITE_NAME'
+      choice choices: ['login', 'address', 'shopping', 'all'], name: 'SUITE_NAME'
     }
     stages {
         stage('Clean Workspace') {
