@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Run TestNG Tests') {
             steps {
-                sh 'mvn clean test -Dsurefire.suiteXmlFiles=${SUITE_NAME}'
+                sh 'mvn clean test -DsuiteName=${SUITE_NAME}.xml'
             }
         }
     }
