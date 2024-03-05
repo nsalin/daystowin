@@ -33,6 +33,7 @@ Open the command prompt and navigate to the folder in which pom.xml file is pres
 Run the below Maven command.
 
     mvn clean test -Dthreads=10
+    mvn clean test --DsuiteName= *name from suites directory*.xml
 
 This will run 10 test cases in parallel (default thread count is 1).
 
