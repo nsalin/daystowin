@@ -30,7 +30,7 @@ pipeline {
     post {
         always {
             // Send email notification
-            publishTestResults autoCreateTestCases: true, customTestCycle: [customFields: '', description: 'BuildResults', folderId: '', jiraProjectVersion: '', name: 'Build'], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'IND', serverAddress: 'https://innovationdays.atlassian.net'
+            publishTestResults autoCreateTestCases: true, customTestCycle: [customFields: '', description: 'BuildResults', folderId: '', jiraProjectVersion: '', name: 'Build'], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
             }
         }
 }
