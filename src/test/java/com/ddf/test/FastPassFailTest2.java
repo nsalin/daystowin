@@ -23,4 +23,9 @@ public class FastPassFailTest2{
     public void fastFailTest(){
         assertFalse(true);
     }
+
+    @Test
+    public void fastPassTest2(){
+        assertTrue(true);
+    }
 }
