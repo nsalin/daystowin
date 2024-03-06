@@ -28,21 +28,20 @@ pipeline {
             }
         }
 
-         stages {
-                stage('Publish to Zephyr') {
-                    steps {
-                        script {
-                            // Use the FULL_NAME environment variable in your publishTestResults command
-                            publishTestResults autoCreateTestCases: true, customTestCycle: [
-                                customFields: '',
-                                description: 'BuildResults',
-                                folderId: '',
-                                jiraProjectVersion: '',
-                                name: "${env.FULL_NAME}"  // Using the FULL_NAME variable here
-                            ], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
-                        }
-                    }
+        stage('Publish to Zephyr') {
+            steps {
+                script {
+                    // Use the FULL_NAME environment variable in your publishTestResults command
+                    publishTestResults autoCreateTestCases: true, customTestCycle: [
+                        customFields: '',
+                        description: 'BuildResults',
+                        folderId: '',
+                        jiraProjectVersion: '',
+                        name: "${env.FULL_NAME}"  // Using the FULL_NAME variable here
+                    ], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
                 }
+            }
+        }
     }
     post {
         always {
