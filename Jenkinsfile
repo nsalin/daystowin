@@ -4,11 +4,8 @@ pipeline {
         // Make sure Maven and JDK tool names match those configured in Jenkins
         maven 'Maven' // Name of the Maven tool as configured in Jenkins
     }
-    environment {
-            SELENIUM_RUN_ENVIRONMENT = 'grid'
-    }
     parameters {
-      choice choices: ['fastSuite','login', 'address', 'shopping', 'all'], name: 'SUITE_NAME'
+      choice choices: ['fastSuiteSimple', 'fastSuiteWithAnnotation', 'fastSuiteWithTestCaseId'], name: 'SUITE_NAME'
     }
     stages {
         stage('Clean Workspace') {
@@ -30,7 +27,7 @@ pipeline {
     post {
         always {
             // Send email notification
-            publishTestResults autoCreateTestCases: true, customTestCycle: [customFields: '', description: 'BuildResults', folderId: '', jiraProjectVersion: '', name: 'Build'], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
+            publishTestResults autoCreateTestCases: true, customTestCycle: [customFields: '', description: 'BuildResults', folderId: '', jiraProjectVersion: '', name: '${env.JOB_NAME}'], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
             }
         }
 }

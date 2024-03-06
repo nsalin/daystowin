@@ -3,10 +3,11 @@
 <suite parallel="classes" name="Suite">
     <listeners>
         <listener class-name="org.testng.reporters.JUnitXMLReporter"/>
+        <listener class-name="com.dff.listeners.TestListener"/>
     </listeners>
     <test name="Test">
         <classes>
-            <class name="com.ddf.test.FastPassFailTest2" />
+            <class name="com.ddf.test.FastPassFailZephyrAnnotationTest" />
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
