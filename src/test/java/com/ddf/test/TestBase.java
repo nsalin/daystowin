@@ -37,7 +37,13 @@ public class TestBase implements GlobalVariables{
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();  
 		chromePrefs.put("download.default_directory", DOWNLOAD_FOLDER);  
 		ChromeOptions options = new ChromeOptions();  
-		options.setExperimentalOption("prefs", chromePrefs);  
+		options.setExperimentalOption("prefs", chromePrefs);
+		options.addArguments("--headless"); // Run Chrome in headless mode
+		options.addArguments("--disable-gpu");
+		options.addArguments("--verbose");
+		options.addArguments("--log-level=0");
+		options.addArguments("--no-sandbox"); // Bypass OS security model, REQUIRED on Linux
+		options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
 		options.addArguments("--remote-allow-origins=*");  
 		options.setAcceptInsecureCerts(true);
 		WebDriver driver = new  ChromeDriver(options);
