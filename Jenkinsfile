@@ -30,13 +30,6 @@ pipeline {
     post {
         always {
             // Send email notification
-            emailext (
-                subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER} Finished",
-                            body: """<p>Build status: ${currentBuild.currentResult}</p>
-                                     <p>View the build details at: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
-                to: 'alin.nitu@3pillarglobal.com'
-            )
-            publishTestResults autoCreateTestCases: true, filePath: 'target/surefire-reports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
-        }
+            publishTestResults autoCreateTestCases: true, customTestCycle: [customFields: '{"checkbox": true}', description: 'BuildResults', folderId: '13089886', jiraProjectVersion: '10000', name: 'Build'], filePath: 'target/surefire-reports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'        }
     }
 }
