@@ -36,6 +36,7 @@ pipeline {
                                      <p>View the build details at: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
                 to: 'alin.nitu@3pillarglobal.com'
             )
+            publishTestResults autoCreateTestCases: true, filePath: 'target/surefire-reports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
         }
     }
 }
