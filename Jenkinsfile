@@ -4,6 +4,9 @@ pipeline {
         // Make sure Maven and JDK tool names match those configured in Jenkins
         maven 'Maven' // Name of the Maven tool as configured in Jenkins
     }
+    environment {
+            SELENIUM_RUN_ENVIRONMENT = 'grid'
+    }
     parameters {
       choice choices: ['fastSuite','login', 'address', 'shopping', 'all'], name: 'SUITE_NAME'
     }

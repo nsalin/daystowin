@@ -4,6 +4,8 @@ import java.io.File;
 import java.time.Duration;
 
 public interface GlobalVariables {
+	String RUN_ENVIRONMENT = System.getenv("SELENIUM_RUN_ENVIRONMENT") != null ? System.getenv("SELENIUM_RUN_ENVIRONMENT") : Config.getProperty("runEnvironment");
+	String GRID_URL = System.getenv("SELENIUM_GRID_URL") != null ? System.getenv("SELENIUM_GRID_URL") : Config.getProperty("gridUrl");
 
 	String BASE_URL = Config.getProperty("url");	//"http://demowebshop.tricentis.com/";
 	String EMAIL = Config.getProperty("userEmail");	//"test321@yahoo.com";

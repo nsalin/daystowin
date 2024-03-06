@@ -1,6 +1,8 @@
 package com.ddf.test;
 
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -8,6 +10,7 @@ import io.github.bonigarcia.wdm.config.Architecture;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -25,6 +28,7 @@ import com.dff.utils.ExcelUtil;
 @Listeners({TestListener.class})
 public class TestBase implements GlobalVariables{
 	protected WebDriverWait wait;
+	WebDriver driver;
 
 	@BeforeSuite
 	public void configurations(ITestContext context) {
@@ -35,9 +39,8 @@ public class TestBase implements GlobalVariables{
 	}
 
 	@BeforeMethod (alwaysRun = true)
-	public void setup(Method method) {
-		WebDriverManager.chromedriver().architecture(Architecture.ARM64).setup();
-
+	public void setup(Method method) throws MalformedURLException {
+		WebDriverManager.chromedriver().setup();
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();  
 		chromePrefs.put("download.default_directory", DOWNLOAD_FOLDER);  
 		ChromeOptions options = new ChromeOptions();  
@@ -50,7 +53,15 @@ public class TestBase implements GlobalVariables{
 		options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
 		options.addArguments("--remote-allow-origins=*");  
 		options.setAcceptInsecureCerts(true);
-		WebDriver driver = new  ChromeDriver(options);
+		if (RUN_ENVIRONMENT.equalsIgnoreCase("grid")) {
+			// Use the GRID_URL from GlobalVariables
+			URL gridUrl = new URL(GRID_URL); // Dynamically obtain Grid URL from configuration
+			driver = new RemoteWebDriver(gridUrl, options);
+		} else {
+			// Local execution with ChromeDriver
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver(options);
+		}
 		driver.get(BASE_URL);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT);
