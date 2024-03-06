@@ -3,6 +3,7 @@ package com.ddf.test;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -34,6 +35,8 @@ public class TestBase implements GlobalVariables{
 
 	@BeforeMethod (alwaysRun = true)
 	public void setup(Method method) {
+		WebDriverManager.chromedriver().setup();
+		
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();  
 		chromePrefs.put("download.default_directory", DOWNLOAD_FOLDER);  
 		ChromeOptions options = new ChromeOptions();  
