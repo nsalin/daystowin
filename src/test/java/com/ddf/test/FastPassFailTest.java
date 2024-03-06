@@ -6,6 +6,7 @@ import com.dff.reports.ReportManager;
 import io.qameta.allure.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -22,7 +23,11 @@ public class FastPassFailTest extends TestBase {
     @Override
     @BeforeMethod(alwaysRun = true)
     public void setup(Method method) {
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // Run Chrome in headless mode
+        options.addArguments("--no-sandbox"); // Bypass OS security model, REQUIRED on Linux
+        options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT);
         wait = new WebDriverWait(driver, EXPLICIT_WAIT);
         DriverManager.getInstance().setDriver(driver);
