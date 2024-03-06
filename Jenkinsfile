@@ -7,6 +7,10 @@ pipeline {
     parameters {
       choice choices: ['fastSuiteSimple', 'fastSuiteWithAnnotation', 'fastSuiteWithTestCaseId'], name: 'SUITE_NAME'
     }
+    environment {
+            // FULL_NAME is concatenated from other variables or set directly
+            FULL_NAME = "${env.JOB_NAME}_${env.BUILD_NUMBER}"
+    }
     stages {
         stage('Clean Workspace') {
             steps {
@@ -23,11 +27,26 @@ pipeline {
                 sh 'mvn clean test -DsuiteName=${SUITE_NAME}.xml'
             }
         }
+
+         stages {
+                stage('Publish to Zephyr') {
+                    steps {
+                        script {
+                            // Use the FULL_NAME environment variable in your publishTestResults command
+                            publishTestResults autoCreateTestCases: true, customTestCycle: [
+                                customFields: '',
+                                description: 'BuildResults',
+                                folderId: '',
+                                jiraProjectVersion: '',
+                                name: "${env.FULL_NAME}"  // Using the FULL_NAME variable here
+                            ], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
+                        }
+                    }
+                }
     }
     post {
         always {
             // Send email notification
-            publishTestResults autoCreateTestCases: true, customTestCycle: [customFields: '', description: 'BuildResults', folderId: '', jiraProjectVersion: '', name: "${env.BUILD_NAME}"], filePath: 'target/surefire-reports/junitreports/*.xml', format: 'JUnit XML Result File', projectKey: 'TES', serverAddress: 'https://innovationdays.atlassian.net'
             }
         }
 }
