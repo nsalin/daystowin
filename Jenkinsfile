@@ -28,9 +28,9 @@ pipeline {
         always {
             // Send email notification
             emailext (
-                subject: "Build ${currentBuild.fullDisplayName}",
-                body: """<p>Build status: ${currentBuild.currentResult}</p>
-                         <p>Check console output at <a href='${buildUrl}console'>${buildUrl}console</a></p>""",
+                subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER} Finished",
+                            body: """<p>Build status: ${currentBuild.currentResult}</p>
+                                     <p>View the build details at: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
                 to: 'alin.nitu@3pillarglobal.com'
             )
         }
