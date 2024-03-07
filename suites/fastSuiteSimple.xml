@@ -7,7 +7,13 @@
     </listeners>
     <test name="Test">
         <classes>
-            <class name="com.ddf.test.FastSkipAndFailTest" />
+            <class name="com.ddf.test.FastSkipAndFailTest" >
+            <methods>
+            <include name="fastPassTest"></include>
+            <include name="fastPassTest1"></include>
+            <include name="fastPassTest2"></include>
+            </methods>
+            </class>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
