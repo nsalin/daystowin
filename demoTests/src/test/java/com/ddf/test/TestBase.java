@@ -1,0 +1,54 @@
+package com.ddf.test;
+
+import com.dff.listeners.ZephyrScaleListener;
+import org.testng.ISuite;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import java.util.Collections;
+
+public class TestBase {
+
+    final static protected String ZEPHYR_SCALE_PROJECT_KEY = "TES";
+    final static protected String ZEPHYR_SCALE_PROJECT_KEY_PARAMETER = "TES";
+    static protected ZephyrScaleListener zephyrScaleListener;
+    static protected ISuite testSuite;
+    static protected ITestContext testContext;
+    static protected ITestResult testResult;
+
+    @BeforeSuite
+    public void startSuite(ITestContext iTestContext) {
+        testSuite = iTestContext.getSuite();
+        testSuite.getXmlSuite().setParameters(Collections.singletonMap(ZEPHYR_SCALE_PROJECT_KEY_PARAMETER, ZEPHYR_SCALE_PROJECT_KEY));
+        zephyrScaleListener = new ZephyrScaleListener();
+        zephyrScaleListener.onStart(testSuite);
+    }
+
+    @AfterSuite
+    public void finishSuite(ITestContext iTestContext) {
+        zephyrScaleListener.onFinish(testSuite);
+    }
+
+    @BeforeTest
+    public void startTest(ITestContext iTestContext) {
+        testContext = iTestContext;
+        zephyrScaleListener.onStart(testContext);
+    }
+
+    @AfterTest
+    public void finishTest(ITestContext iTestContext) {
+        zephyrScaleListener.onFinish(testContext);
+    }
+
+    @BeforeMethod
+    public void initTestResult(ITestResult iTestResult) {
+        testResult = iTestResult;
+    }
+
+    protected static class ExampleException extends Exception {
+        public ExampleException(String message) {
+            super(message);
+        }
+    }
+}
