@@ -7,7 +7,7 @@
     </listeners>
     <test name="Test">
         <classes>
-            <class name="com.ddf.test.FastPassFailTest" />
+            <class name="com.ddf.test.FastSkipAndFailTest" />
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
