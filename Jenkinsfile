@@ -5,7 +5,7 @@ pipeline {
         maven 'Maven' // Name of the Maven tool as configured in Jenkins
     }
     parameters {
-      choice choices: ['fastSuiteSimple', 'fastSuiteWithAnnotation', 'fastSuiteWithTestCaseId'], name: 'SUITE_NAME'
+      choice choices: ['simpleZehyrAPITests.xml','fastSuiteSimple', 'fastSuiteWithAnnotation', 'fastSuiteWithTestCaseId'], name: 'SUITE_NAME'
     }
     environment {
             // FULL_NAME is concatenated from other variables or set directly
