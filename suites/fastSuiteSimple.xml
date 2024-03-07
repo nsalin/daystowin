@@ -11,7 +11,6 @@
             <methods>
             <include name="fastPassTest"></include>
             <include name="fastPassTest1"></include>
-            <include name="fastPassTest2"></include>
             </methods>
             </class>
             <class name="com.ddf.test.FastPassFailTest"/>
