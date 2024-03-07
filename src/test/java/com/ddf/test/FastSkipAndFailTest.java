@@ -23,6 +23,6 @@ public class FastSkipAndFailTest {
         String name = "Innovation ";
         String week = "Week";
         String expected = name + week;
-        Assert.assertEquals("Innovation Week", expected, "Result Matches");
+        Assert.assertEquals("Innovation-Week", expected, "Result Matches");
     }
 }
