@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite parallel="classes" name="SuiteTestNewAnnotation2">
+<suite parallel="classes" name="SuiteTestNewAnnotation21">
     <parameter name="ZEPHYR_SCALE_PROJECT_KEY" value="TES"/>
     <parameter name="ZEPHYR_SCALE_PROJECT_KEY_PARAMETER" value="TES"/>
     <listeners>
@@ -10,6 +10,7 @@
     <test name="Test">
         <classes>
             <class name="com.ddf.test.SimpleListenerTestsTest" />
+            <class name="com.ddf.test.FastPassFailZephyrAnnotationTest" />
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
