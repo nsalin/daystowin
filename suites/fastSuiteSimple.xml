@@ -14,6 +14,7 @@
             <include name="fastPassTest2"></include>
             </methods>
             </class>
+            <class name="com.ddf.test.FastPassFailTest"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
