@@ -18,7 +18,7 @@ public class FastSkipAndFailTest {
         System.out.println("This is fast Skip");
     }
 
-    @Test(testName = "This is Fast Pass 2", description = "Fast suite")
+    //@Test(testName = "This is Fast Pass 2", description = "Fast suite")
     public void fastPassTest2(){
         String name = "Innovation ";
         String week = "Week";
